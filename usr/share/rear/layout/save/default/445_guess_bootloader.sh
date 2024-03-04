@@ -38,15 +38,6 @@ if test -f /etc/sysconfig/bootloader ; then
     fi
 fi
 
-# On ARM, guess the dummy bootloader:
-if [ "$ARCH" = "Linux-arm" ] ; then
-    BOOTLOADER=ARM
-    # Inform the user that we do nothing:
-    LogPrint "Using guessed bootloader 'ARM'. Skipping bootloader backup, see default.conf about 'BOOTLOADER'"
-    echo "$BOOTLOADER" >$bootloader_file
-    return
-fi
-
 # Finally guess the used bootloader by inspecting the first bytes on all disks
 # and use the first one that matches a known bootloader string:
 for block_device in /sys/block/* ; do
